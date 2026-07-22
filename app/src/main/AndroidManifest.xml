@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OD23Storage">
         <activity
+            android:name=".DBActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
