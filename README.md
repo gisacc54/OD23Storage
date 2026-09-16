@@ -1,6 +1,6 @@
 # OD23 Storage — Android with Java, step by step
 
-OD23 Storage is a small teaching app for **Android**, written in **Java**. The app you build here stores data on the device two ways: one name in **SharedPreferences**, and a list of users in a **SQLite** database shown in a `ListView`. Three further lessons add the menus Android gives you — the three-dot menu, the sliding drawer and the bottom bar.
+OD23 Storage is a small teaching app for **Android**, written in **Java**. The app you build here stores data on the device two ways: one name in **SharedPreferences**, and a list of users in a **SQLite** database shown in a `ListView`. Three further lessons add the menus Android gives you — the options menu behind the three dots, the sliding drawer and the bottom bar.
 
 These notes are the written version of our sessions: read one lesson per session, and type the code yourself.
 
@@ -29,7 +29,7 @@ launcher icon --(tap)--> MainActivity --(Save)--> name stored, shown under the b
 ## How to use these notes
 
 - Read the lessons in order. Each one assumes the file the lesson before it left behind.
-- Some lessons share a file. Lesson 3 reads `activity_main.xml` and lesson 4 replaces it; lesson 4 writes `MainActivity.java` and lesson 5 adds two methods below its `onCreate()`; lesson 6 creates `DBActivity.java` and lesson 7 fills it; lesson 2 reads `strings.xml` and lesson 8 adds two lines to it.
+- Lessons 1 and 2 share `MainActivity.java`, so do them in that order. Lessons 3, 4 and 5 each build their own screen and do not touch the files before them.
 - Type the code, do not paste it. You remember what your fingers write.
 - Every step names the exact file and the exact place in it — "below the `package` line", "inside `onCreate()`, under `setContentView(...)`".
 - Every lesson ends with a "check the complete file" step. Compare yours against it before you run the app.
@@ -44,17 +44,13 @@ launcher icon --(tap)--> MainActivity --(Save)--> name stored, shown under the b
 
 | # | Lesson | What you learn | Files it touches |
 |---|---|---|---|
-| 1 | [The Project Skeleton](project-skeleton.md) | `namespace`, `applicationId`, `minSdk`, `targetSdk`, the `libs.versions.toml` version catalog, `implementation`, `<activity>`, `<intent-filter>`, `LAUNCHER`, `android:exported` | `app/build.gradle.kts`, `gradle/libs.versions.toml`, `settings.gradle.kts`, `AndroidManifest.xml` |
-| 2 | [Theme And Resources](theme-and-resources.md) | `@string/app_name`, `@color`, `@style`, `Theme.MaterialComponents.DayNight.DarkActionBar`, `colorPrimary`, `values-night`, mipmap launcher icons | `res/values/*`, `res/values-night/themes.xml`, `res/mipmap-*/` |
-| 3 | [Layouts And Views](layouts-and-views.md) | `ConstraintLayout` against `LinearLayout`, `android:orientation`, `match_parent`, `wrap_content`, `android:padding`, `EditText`, `android:hint`, `Button`, `TextView`, `ListView`, `@+id` | the two files in `res/layout/` |
-| 4 | [Saving With SharedPreferences](sharedpreferences.md) | `findViewById`, `setOnClickListener`, `getSharedPreferences`, `MODE_PRIVATE`, `edit()`, `putString`, `apply()`, `getString` with a default value, `setText` | `MainActivity.java`, `res/layout/activity_main.xml` |
-| 5 | [The Three-Dot Menu](options-menu.md) | menu resource files, `<item>`, `onCreateOptionsMenu`, `getMenuInflater().inflate`, `onOptionsItemSelected`, `getItemId`, `Toast.makeText`, `finish()`, `app:showAsAction` | `res/menu/main_menu.xml`, `MainActivity.java` |
-| 6 | [Adding A Second Screen](second-screen.md) | the Empty Views Activity wizard, `<activity android:name=".DBActivity">`, `android:exported`, `setContentView(R.layout.activity_db)`, moving the `LAUNCHER` intent-filter to test a screen | `AndroidManifest.xml`, `DBActivity.java`, `res/layout/activity_db.xml` |
-| 7 | [The Users Database](sqlite-create-read.md) | `SQLiteOpenHelper`, `execSQL`, `CREATE TABLE`, the database version and `onUpgrade`, `getWritableDatabase`, `ContentValues`, `insert`, `rawQuery`, `Cursor`, `moveToNext`, `getColumnIndexOrThrow`, `ArrayAdapter`, `simple_list_item_1`, `notifyDataSetChanged` | `DatabaseHelper.java`, `DBActivity.java` |
-| 8 | [The Hamburger Menu](hamburger-menu.md) | `DrawerLayout`, `NavigationView`, `app:menu`, `layout_gravity="start"`, `ActionBarDrawerToggle`, `addDrawerListener`, `syncState`, `setDisplayHomeAsUpEnabled`, `setNavigationItemSelectedListener`, `closeDrawers` | `DrawerActivity.java`, `res/menu/drawer_menu.xml`, `res/layout/activity_drawer.xml`, `res/values/strings.xml` |
-| 9 | [Bottom Navigation](bottom-menu.md) | `BottomNavigationView`, `app:menu`, `layout_weight`, `setOnItemSelectedListener`, `getItemId`, the built-in `@android:drawable` icons | `BottomActivity.java`, `res/menu/bottom_menu.xml`, `res/layout/activity_bottom.xml` |
+| 1 | [SharedPreferences](sharedpreferences.md) | `findViewById`, `setOnClickListener`, `getSharedPreferences`, `MODE_PRIVATE`, `edit()`, `putString`, `apply()`, `getString` with a default value, `setText` | `res/layout/activity_main.xml`, `MainActivity.java` |
+| 2 | [Options Menu](options-menu.md) | menu resource files, `<item>`, `onCreateOptionsMenu`, `getMenuInflater().inflate`, `onOptionsItemSelected`, `getItemId`, `Toast.makeText`, `finish()`, `app:showAsAction` | `res/menu/main_menu.xml`, `MainActivity.java` |
+| 3 | [SQLite Create Read](sqlite-create-read.md) | `SQLiteOpenHelper`, `execSQL`, `CREATE TABLE`, the database version and `onUpgrade`, `getWritableDatabase`, `ContentValues`, `insert`, `rawQuery`, `Cursor`, `moveToNext`, `getColumnIndexOrThrow`, `ArrayAdapter`, `simple_list_item_1`, `notifyDataSetChanged` | `res/layout/activity_db.xml`, `DatabaseHelper.java`, `DBActivity.java` |
+| 4 | [Hamburger Menu](hamburger-menu.md) | `DrawerLayout`, `NavigationView`, `app:menu`, `layout_gravity="start"`, `ActionBarDrawerToggle`, `addDrawerListener`, `syncState`, `setDisplayHomeAsUpEnabled`, `setNavigationItemSelectedListener`, `closeDrawers` | `res/menu/drawer_menu.xml`, `res/layout/activity_drawer.xml`, `res/values/strings.xml`, `DrawerActivity.java` |
+| 5 | [Bottom Menu](bottom-menu.md) | `BottomNavigationView`, `app:menu`, `layout_weight`, `setOnItemSelectedListener`, `getItemId`, the built-in `@android:drawable` icons | `res/menu/bottom_menu.xml`, `res/layout/activity_bottom.xml`, `BottomActivity.java` |
 
-Lessons 1 to 3 are read-along: you open files that already exist and learn to read them, and you type nothing. From lesson 4 on, every lesson adds code, and lesson 7 is the longest — eight steps, and the only one that writes two Java files at once.
+Every lesson adds code — there is no read-along session here. Lessons 1 and 2 edit the same file in sequence: lesson 1 writes `MainActivity.java`, and lesson 2 adds two methods below its `onCreate()` without touching what you typed before.
 
 ---
 
@@ -86,7 +82,7 @@ Lessons 1 to 3 are read-along: you open files that already exist and learn to re
 | `ExampleUnitTest` | `app/src/test/java/…` | **generated placeholder, asserts `2 + 2 == 4` and tests nothing in this app** |
 | `ExampleInstrumentedTest` | `app/src/androidTest/java/…` | **generated placeholder, checks the package name only** |
 
-Some names here are historical, and they will confuse you if nobody says so. The project is called *Storage*, but three of the nine lessons are about menus — the repo started as a storage exercise and grew into the wider course. The database file is `MyApp.db`, a leftover from the first draft, not `od23.db`. That first draft still sits in the repo as `sqlite-create-read-old.md`: it splits the code over a `UserContract` class and a `User` model and calls the table `user`, none of which exist in the code today — read `sqlite-create-read.md` instead. And the lesson file `sharedpreferences.md` is the one filename without hyphens.
+Some names here are historical, and they will confuse you if nobody says so. The project is called *Storage*, but three of the five lessons are about menus — the repo started as a storage exercise and grew into the wider course. The database file is `MyApp.db`, a leftover from the first draft, not `od23.db`. That first draft still sits in the repo as `sqlite-create-read-old.md`: it splits the code over a `UserContract` class and a `User` model and calls the table `user`, none of which exist in the code today — read `sqlite-create-read.md` instead. And the lesson file `sharedpreferences.md` is the one filename without hyphens.
 
 ---
 
